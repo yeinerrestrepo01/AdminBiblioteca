@@ -1,11 +1,13 @@
 ﻿using Bll;
 using Entities.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaAdmin.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriasController : ControllerBase
     {
         private readonly Biblioteca Biblioteca = new Biblioteca(new CategoriaBll());
