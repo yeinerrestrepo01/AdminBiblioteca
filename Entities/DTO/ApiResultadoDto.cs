@@ -11,7 +11,7 @@ namespace Entities.DTO
     {
         public string Mesanje { get; set; }
 
-        public bool Error { get; set; }
+        public bool isError { get; set; }
 
         public object Resultado { get; set; }
     }

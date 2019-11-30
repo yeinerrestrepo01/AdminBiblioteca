@@ -38,5 +38,11 @@ namespace Common
         /// Mensaje  confirmacion edicion exitosa
         /// </summary>
         public const string NoExisteId = "No existe un registro con el Id ingresado";
+
+        /// <summary>
+        /// Mensaje  confirmacion edicion exitosa
+        /// </summary>
+        public const string ERRORMSG = "se ha presentado un error inesperado";
+        
     }
 }

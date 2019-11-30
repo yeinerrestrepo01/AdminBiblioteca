@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BibliotecaAdmin.CustomExceptionFilter;
 using Bll;
 using Dal;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,12 @@ namespace BibliotecaAdmin
             services.AddScoped<Biblioteca>();
             services.AddScoped<IBiblioteca, CategoriaBll>();
             services.AddScoped<IBiblioteca, AutoresBll>();
+            services.AddMvc(
+               config =>
+               {
+                   config.Filters.Add(typeof(CustomExceptionHandler));
+               }
+           );
             services.AddControllers();
         }
 
