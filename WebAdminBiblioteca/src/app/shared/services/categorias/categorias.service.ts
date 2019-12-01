@@ -13,4 +13,18 @@ export class CategoriasService {
   ListCategorias(){
     return this.api.get('api/categorias')
   }
+
+  RemoverCategoria(idcategoria:any){
+        return this.api.delete('api/categorias/' + idcategoria);
+  }
+
+  CrearCategoria(objectcategoria : any){
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.api.post("api/categorias",objectcategoria,  { headers: headers });
+   }
+
+   EditarCategoria(idcategoria :any ,objectcategoria : any){
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.api.put("api/categorias/" + idcategoria,objectcategoria,  { headers: headers });
+   }
 }

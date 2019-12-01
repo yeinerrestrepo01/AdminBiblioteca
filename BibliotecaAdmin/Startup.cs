@@ -73,6 +73,11 @@ namespace BibliotecaAdmin
                     ValidateAudience = false
                 };
             });
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://localhost:4200/"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

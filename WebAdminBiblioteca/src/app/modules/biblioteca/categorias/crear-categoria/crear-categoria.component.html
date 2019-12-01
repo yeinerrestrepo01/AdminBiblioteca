@@ -3,20 +3,21 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
-            <form>
+            <form [formGroup]="formGroup">
                 <div class="form-group">
                     <label for="categoriaNombre">Nombre de Categoria</label>
-                    <input type="email" class="form-control" id="categoriaNombre" placeholder="Nombre de categoria">
+                    <input type="email" class="form-control" id="categoriaNombre" placeholder="Nombre de categoria"
+                        formControlName="categoriaNombre">
                 </div>
                 <div class="form-group">
                     <label for="descripcioncategoria">Descripcion Categoria</label>
                     <input type="email" class="form-control" id="descripcioncategoria"
-                        placeholder="Descripcion Categoria">
+                        placeholder="Descripcion Categoria" formControlName="descripcioncategoria">
                 </div>
 
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary"> Registrar</button>
-                    <!-- <button type="button" class="btn btn-primary" (click)="resetfiltros()">Limpiar Filtro</button> -->
+                    <button type="button" class="btn btn-primary" style="margin-right: 5px;" *ngIf="!isupdate" (click)="RegistraCategoria()" > Registrar</button>
+                    <button type="button" class="btn btn-danger" *ngIf="isupdate" (click)="ActualizarRegistro()">Actualizar</button>
                 </div>
             </form>
         </div>
@@ -35,7 +36,10 @@
                     <tr *ngFor="let categorias of listcategorias">
                         <td>{{categorias.nombre}}</td>
                         <td>{{categorias.descripcion}}</td>
-                        <td><i class="fa fa-pencil-square-o" style="cursor: pointer;" title="Actualizar"></i></td>
+                        <td>
+                            <i class="fa fa-close" style="cursor: pointer;margin-right: 8px;" title="Eliminar" (click)="RemoverCategoria(categorias)"></i>
+                            <i class="fa fa-edit" style="cursor: pointer;" title="Actualizar" (click)="EditarRegistro(categorias)"></i>
+                        </td>
                     </tr>
                 </tbody>
             </table>

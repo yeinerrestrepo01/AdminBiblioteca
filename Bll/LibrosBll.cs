@@ -52,7 +52,7 @@ namespace Bll
 
             this.BibliotecaContex.Libros.Add(libros);
             this.BibliotecaContex.SaveChanges();
-            Apiresult.Mesanje = Mensajes.RegistrosExitoso;
+            Apiresult.Mensaje = Mensajes.RegistrosExitoso;
             return Apiresult;
         }
 
@@ -71,12 +71,12 @@ namespace Bll
                 libros.ISBN = entity.ISBN;
                 libros.CategoriasIdCategoria = (int)entity.IdCategoria;
                 libros.AutoresIdAutor = (int)entity.IdAutor;
-                Apiresult.Mesanje = Mensajes.EdicionExitosa;
+                Apiresult.Mensaje = Mensajes.EdicionExitosa;
                 BibliotecaContex.SaveChanges();
             }
             else
             {
-                Apiresult.Mesanje = Mensajes.NoExisteId;
+                Apiresult.Mensaje = Mensajes.NoExisteId;
             }
             return Apiresult;
         }
@@ -94,11 +94,11 @@ namespace Bll
             {
                 BibliotecaContex.Libros.Remove(new Libros { IdLibro = id });
                 BibliotecaContex.SaveChanges();
-                Apiresult.Mesanje = Mensajes.EliminacionExitosa;
+                Apiresult.Mensaje = Mensajes.EliminacionExitosa;
             }
             else
             {
-                Apiresult.Mesanje = Mensajes.NoExisteId;
+                Apiresult.Mensaje = Mensajes.NoExisteId;
             }
             return Apiresult;
         }
@@ -120,7 +120,7 @@ namespace Bll
 
             }).ToList();
 
-            Apiresult.Mesanje = Utilidades.MensajesResult(listLibros);
+            Apiresult.Mensaje = Utilidades.MensajesResult(listLibros);
             Apiresult.Resultado = listLibros;
             return Apiresult;
         }

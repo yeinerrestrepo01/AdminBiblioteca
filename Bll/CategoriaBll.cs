@@ -45,7 +45,7 @@ namespace Bll
             var categogira = new Categorias { Nombre = entity.Nombres, Descripcion = entity.Descripcion };
             BibliotecaContex.Categorias.Add(categogira);
             BibliotecaContex.SaveChanges();
-            Apiresult.Mesanje = Mensajes.RegistrosExitoso;
+            Apiresult.Mensaje = Mensajes.RegistrosExitoso;
             return Apiresult;
 
         }
@@ -64,12 +64,12 @@ namespace Bll
             {
                 editarcategoria.Descripcion = entity.Descripcion;
                 editarcategoria.Nombre = entity.Nombres;
-                Apiresult.Mesanje = Mensajes.EdicionExitosa;
+                Apiresult.Mensaje = Mensajes.EdicionExitosa;
                 BibliotecaContex.SaveChanges();
             }
             else
             {
-                Apiresult.Mesanje = Mensajes.NoExisteId;
+                Apiresult.Mensaje = Mensajes.NoExisteId;
             }
             return Apiresult;
         }
@@ -87,11 +87,11 @@ namespace Bll
             {
                 BibliotecaContex.Categorias.Remove(new Categorias { IdCategoria = id });
                 BibliotecaContex.SaveChanges();
-                Apiresult.Mesanje = Mensajes.EliminacionExitosa;
+                Apiresult.Mensaje = Mensajes.EliminacionExitosa;
             }
             else
             {
-                Apiresult.Mesanje = Mensajes.NoExisteId;
+                Apiresult.Mensaje = Mensajes.NoExisteId;
             }
 
             return Apiresult;
@@ -111,7 +111,7 @@ namespace Bll
                 IdCategoria = t.IdCategoria
             }).ToList();
 
-            Apiresult.Mesanje = Utilidades.MensajesResult(listcategoriaresultado);
+            Apiresult.Mensaje = Utilidades.MensajesResult(listcategoriaresultado);
             Apiresult.Resultado = listcategoriaresultado;
             return Apiresult;
         }

@@ -52,7 +52,7 @@ namespace Bll
             };
             BibliotecaContex.Autores.Add(Autores);
             BibliotecaContex.SaveChanges();
-            Apiresult.Mesanje = Mensajes.RegistrosExitoso;
+            Apiresult.Mensaje = Mensajes.RegistrosExitoso;
             return Apiresult;
         }
 
@@ -72,11 +72,11 @@ namespace Bll
                 editarAutor.Apellidos = entity.Apellidos;
                 editarAutor.FechaNacimiento = (DateTime)entity.FechaNacimiento;
                 BibliotecaContex.SaveChanges();
-                Apiresult.Mesanje = Mensajes.EdicionExitosa;
+                Apiresult.Mensaje = Mensajes.EdicionExitosa;
             }
             else
             {
-                Apiresult.Mesanje = Mensajes.NoExisteId;
+                Apiresult.Mensaje = Mensajes.NoExisteId;
             }
             return Apiresult;
         }
@@ -94,11 +94,11 @@ namespace Bll
             {
                 BibliotecaContex.Autores.Remove(new Autores { IdAutor = id });
                 BibliotecaContex.SaveChanges();
-                Apiresult.Mesanje = Mensajes.EliminacionExitosa;
+                Apiresult.Mensaje = Mensajes.EliminacionExitosa;
             }
             else
             {
-                Apiresult.Mesanje = Mensajes.NoExisteId;
+                Apiresult.Mensaje = Mensajes.NoExisteId;
             }
             return Apiresult;
         }
@@ -118,7 +118,7 @@ namespace Bll
                 IdAutor = t.IdAutor
             }).ToList();
 
-            Apiresult.Mesanje = Utilidades.MensajesResult(listAutorresultado);
+            Apiresult.Mensaje = Utilidades.MensajesResult(listAutorresultado);
             Apiresult.Resultado = listAutorresultado;
             return Apiresult;
         }

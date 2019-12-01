@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { Api } from './shared/api/api';
+import { Interceptor } from './http.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,11 @@ import { Api } from './shared/api/api';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [Api],
+  providers: [Api, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

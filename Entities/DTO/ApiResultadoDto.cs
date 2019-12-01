@@ -9,7 +9,7 @@ namespace Entities.DTO
     /// </summary>
     public class ApiResultadoDto
     {
-        public string Mesanje { get; set; }
+        public string Mensaje { get; set; }
 
         public bool isError { get; set; }
 

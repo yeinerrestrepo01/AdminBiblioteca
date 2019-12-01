@@ -59,7 +59,7 @@ namespace BibliotecaAdmin
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             useresult.Token = tokenHandler.WriteToken(token);
-            useresult.Expires = TimeSpan.FromMinutes(10).TotalMinutes;
+            useresult.Expires = TimeSpan.FromMinutes(10).TotalSeconds;
             return useresult;
         }
     }
