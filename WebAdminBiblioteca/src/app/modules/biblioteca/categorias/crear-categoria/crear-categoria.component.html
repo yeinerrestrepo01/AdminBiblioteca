@@ -18,6 +18,7 @@
                 <div class="col-6">
                     <button type="button" class="btn btn-primary" style="margin-right: 5px;" *ngIf="!isupdate" (click)="RegistraCategoria()" > Registrar</button>
                     <button type="button" class="btn btn-danger" *ngIf="isupdate" (click)="ActualizarRegistro()">Actualizar</button>
+                    <button type="button" class="btn btn-warning" *ngIf="isupdate" (click)="cancelar()">Cancelar</button>
                 </div>
             </form>
         </div>

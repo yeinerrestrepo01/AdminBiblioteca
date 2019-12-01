@@ -53,7 +53,7 @@ export class CrearCategoriaComponent implements OnInit {
    
   }
 
-  RegistraCategoria(categoriapost: any) {
+  RegistraCategoria() {
     let objectcategoria = {
       Nombres: this.formGroup.value.categoriaNombre,
       Descripcion: this.formGroup.value.descripcioncategoria
@@ -100,4 +100,12 @@ export class CrearCategoriaComponent implements OnInit {
       this.ListCategorias();
     });
   }
+
+  cancelar() {
+    this.isupdate = false;
+    this.formGroup = this.formBuilder.group({
+      categoriaNombre: new FormControl("", []),
+      descripcioncategoria: new FormControl("", [])
+    });
+    }
 }

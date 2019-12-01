@@ -1,0 +1,54 @@
+<div class="container">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <form [formGroup]="formGroup">
+                    <div class="form-group">
+                        <label for="nombreautor">Nombres</label>
+                        <input type="text" class="form-control" id="nombreautor" placeholder="Nombre de autor"
+                            formControlName="nombreautor">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidoautor">Apellidos</label>
+                        <input type="text" class="form-control" id="apellidoautor"
+                            placeholder="Apellido de Autor" formControlName="apellidoautor">
+                    </div>
+                    <div class="form-group">
+                            <label for="fechanacimiento">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="fechanacimiento"
+                                placeholder="Fecha nacimiento" formControlName="fechanacimiento">
+                        </div>
+    
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary" style="margin-right: 5px;" *ngIf="!isupdate" (click)="RegistraAutor()" > Registrar</button>
+                        <button type="button" class="btn btn-danger" style="margin-right: 5px;" *ngIf="isupdate" (click)="ActualizarAutor()">Actualizar</button>
+                        <button type="button" class="btn btn-warning" *ngIf="isupdate" (click)="cancelar()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="col-md-12" style="margin-top: 14px;">
+                <h4>Listado de Autores</h4>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Fecha Nacimiento</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let autores of listAutores">
+                            <td>{{autores.nombre}} {{autores.apellidos}}</td>
+                            <td>{{autores.fechaNacimiento | date: 'dd/MM/yyyy'}}</td>
+                            <td>
+                                <i class="fa fa-close" style="cursor: pointer;margin-right: 8px;" title="Eliminar" (click)="RemoverAutor(autores)"></i>
+                                <i class="fa fa-edit" style="cursor: pointer;" title="Actualizar" (click)="EditarRegistro(autores)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

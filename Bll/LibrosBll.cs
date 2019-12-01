@@ -116,7 +116,10 @@ namespace Bll
                 NombreLibro = t.NombreLibro,
                 ISBN = t.ISBN,
                 Autor = t.Autores.Nombre +" " + t.Autores.Apellidos,
-                Categoria = t.Categorias.Nombre  
+                Categoria = t.Categorias.Nombre,
+                IdLibro = t.IdLibro,
+                IdCategoria  = t.CategoriasIdCategoria,
+                IdAutor  = t.AutoresIdAutor
 
             }).ToList();
 
