@@ -21,7 +21,7 @@ namespace BibliotecaAdmin
         /// </summary>
         private List<UserEntity> _users = new List<UserEntity>
         {
-            new UserEntity { Id = 1, FirstName = "Manuel", LastName = "Daza", Username = "AdminBiblioteca", Password = "Admin123" }
+            new UserEntity { Id = 1, Nombres = "Manuel", Apellidos = "Daza", Username = "AdminBiblioteca", Password = "Admin123" }
         };
 
         private readonly AppSettings _appSettings;
@@ -40,7 +40,7 @@ namespace BibliotecaAdmin
         public User Authenticate(string username, string password)
         {
             var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
-            var useresult = new User { Username = user.Username, FirstName = user.FirstName, LastName  = user.LastName};
+            var useresult = new User { Username = user.Username, Nombres = user.Nombres, Apellidos  = user.Apellidos};
             // return null if user not found
             if (useresult == null)
                 return null;
