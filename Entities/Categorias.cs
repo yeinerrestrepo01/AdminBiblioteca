@@ -24,5 +24,7 @@ namespace Entities
         /// Descripcion de categoria
         /// </summary>
         public string Descripcion { get; set; }
+
+        public virtual ICollection<Libros> Libros { get; set; }
     }
 }

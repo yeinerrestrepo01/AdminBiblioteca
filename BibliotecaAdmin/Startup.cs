@@ -33,16 +33,22 @@ namespace BibliotecaAdmin
         {
             services.AddCors();
             services.AddDbContext<AdminBibliotecaContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:AdminBibliotecaDB"]));
-            services.AddScoped<Biblioteca>();
-            services.AddScoped<IBiblioteca, CategoriaBll>();
-            services.AddScoped<IBiblioteca, AutoresBll>();
-            services.AddScoped<IUserService, UserService>();
+            
             services.AddMvc(
                config =>
                {
                    config.Filters.Add(typeof(CustomExceptionHandler));
                }
            );
+          
+            services.AddScoped<Biblioteca>();
+            services.AddScoped<IBiblioteca, AutoresBll>();
+            services.AddScoped<IBiblioteca,AutoresBll>();
+            services.AddScoped<IBiblioteca, CategoriaBll>();
+            services.AddScoped<LibrosBll>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddControllers();
+
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -67,7 +73,6 @@ namespace BibliotecaAdmin
                     ValidateAudience = false
                 };
             });
-            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

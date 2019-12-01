@@ -28,7 +28,7 @@ namespace BibliotecaAdmin.Controllers
             var user = _userService.Authenticate(userParam.Username, userParam.Password);
 
             if (user == null)
-                return BadRequest(new { message = "Error al relizar el proceso de autenticacion" });
+                return BadRequest(new { message = "Error al relizar el proceso de autenticacion. datos ingresados invalados" });
 
             return Ok(user);
         }

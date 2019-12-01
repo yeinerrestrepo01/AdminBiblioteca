@@ -5,6 +5,7 @@ using Common;
 using Dal;
 using Entities;
 using Entities.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bll
 {
@@ -32,12 +33,12 @@ namespace Bll
         {
             this.BibliotecaContex = dbcontex;
         }
-        
+
         /// <summary>
         /// creacion de registro para categorias
         /// </summary>
         /// <param name="entity"></param>
-        /// <returns></returns>
+        /// <returns>ApiResultadoDto</returns>
         public ApiResultadoDto Adicionar(BibliotecaDto entity)
         {
             var Apiresult = new ApiResultadoDto();
@@ -81,7 +82,7 @@ namespace Bll
         public ApiResultadoDto Eliminar(int id)
         {
             var Apiresult = new ApiResultadoDto();
-            var editarcategoria = BibliotecaContex.Categorias.FirstOrDefault(t => t.IdCategoria == id);
+            var editarcategoria = BibliotecaContex.Categorias.AsNoTracking().FirstOrDefault(t => t.IdCategoria == id);
             if (editarcategoria != null)
             {
                 BibliotecaContex.Categorias.Remove(new Categorias { IdCategoria = id });

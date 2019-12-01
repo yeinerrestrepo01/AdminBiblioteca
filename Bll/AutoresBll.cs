@@ -2,6 +2,7 @@
 using Dal;
 using Entities;
 using Entities.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,19 @@ namespace Bll
 {
     public class AutoresBll : IBiblioteca
     {
+     
+
+        /// <summary>
+        ///  context de base de datos
+        /// </summary>
+        private readonly AdminBibliotecaContext BibliotecaContex;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoresBll"/> class.
         /// </summary>
         public AutoresBll()
         {
         }
-
-        /// <summary>
-        ///  context de base de datos
-        /// </summary>
-        private readonly AdminBibliotecaContext BibliotecaContex;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AutoresBll"/> class.
@@ -77,7 +80,7 @@ namespace Bll
             }
             return Apiresult;
         }
-        
+
         /// <summary>
         /// realiza la eliminacion de un autor especifico
         /// </summary>
@@ -86,7 +89,7 @@ namespace Bll
         public ApiResultadoDto Eliminar(int id)
         {
             var Apiresult = new ApiResultadoDto();
-            var editarAutor = BibliotecaContex.Autores.FirstOrDefault(t => t.IdAutor == id);
+            var editarAutor = BibliotecaContex.Autores.AsNoTracking().FirstOrDefault(t => t.IdAutor == id);
             if (editarAutor != null)
             {
                 BibliotecaContex.Autores.Remove(new Autores { IdAutor = id });

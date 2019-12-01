@@ -1,4 +1,5 @@
 ﻿using Bll;
+using Dal;
 using Entities.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,23 +11,25 @@ namespace BibliotecaAdmin.Controllers
     [Authorize]
     public class CategoriasController : ControllerBase
     {
-        private readonly Biblioteca Biblioteca = new Biblioteca(new CategoriaBll());
+        private readonly Biblioteca _Biblioteca;
+        private readonly AdminBibliotecaContext _ContextDB;
 
         /// <summary>
         /// inializador de nueva instancia controller Categorias
         /// </summary>
-        /// <param name="categoria"></param>
-        /// <param name="biblioteca"></param>
-        public CategoriasController(Biblioteca biblioteca) 
+        /// <param name="contextDB"></param>
+        public CategoriasController(AdminBibliotecaContext contextDB) 
         {
-            this.Biblioteca = biblioteca;
+            this._ContextDB = contextDB;
+            this._Biblioteca = new Biblioteca(new CategoriaBll(contextDB));
         }
 
         // GET: api/Categorias
         [HttpGet]
         public ApiResultadoDto Get() 
         {
-            return Biblioteca.Listado();
+
+            return _Biblioteca.Listado();
         }
 
 
@@ -39,21 +42,21 @@ namespace BibliotecaAdmin.Controllers
         [HttpPost]
         public ApiResultadoDto Post([FromBody] BibliotecaDto entity)
         {
-            return Biblioteca.Adiconar(entity);
+            return _Biblioteca.Adicionar(entity);
         }
 
         // PUT: api/Categorias/5
         [HttpPut("{id}")]
         public ApiResultadoDto Put(int id, [FromBody] BibliotecaDto entity)
         {
-            return Biblioteca.Editar(id ,entity);
+            return _Biblioteca.Editar(id ,entity);
         }
 
         // DELETE: api/Categorias/5
         [HttpDelete("{id}")]
         public ApiResultadoDto Delete(int id)
         {
-            return Biblioteca.Eliminar(id);
+            return _Biblioteca.Eliminar(id);
         }
     }
 }

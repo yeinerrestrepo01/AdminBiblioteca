@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,5 +28,7 @@ namespace Entities
         /// Fecha nacimiento del autor
         /// </summary>
         public DateTime FechaNacimiento { get; set; }
+
+        public virtual ICollection<Libros> Libros { get; set; }
     }
 }

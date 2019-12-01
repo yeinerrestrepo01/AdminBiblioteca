@@ -9,15 +9,14 @@ namespace Bll
     {
         private readonly IBiblioteca BibliotecaI;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Biblioteca"/> class.
         /// </summary>
-        /// <param name="bibliotecaI">bibliotecaI</param>
-        public Biblioteca(IBiblioteca bibliotecaI) => BibliotecaI = bibliotecaI;
+        /// <param name="_bibliotecaI">bibliotecaI</param>
+        public Biblioteca(IBiblioteca _bibliotecaI) => BibliotecaI = _bibliotecaI;
        
 
-        public ApiResultadoDto Adiconar(BibliotecaDto entity)
+        public ApiResultadoDto Adicionar(BibliotecaDto entity)
         {
             return BibliotecaI.Adicionar(entity);
         }

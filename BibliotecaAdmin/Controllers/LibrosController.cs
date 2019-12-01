@@ -14,9 +14,8 @@ namespace BibliotecaAdmin.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class AutoresController : ControllerBase
+    public class LibrosController : ControllerBase
     {
-
         private readonly Biblioteca _Biblioteca;
         private readonly AdminBibliotecaContext _ContextDB;
 
@@ -24,34 +23,35 @@ namespace BibliotecaAdmin.Controllers
         /// inializador de nueva instancia controller Autores
         /// </summary>
         /// <param name="contextDB"></param>
-        public AutoresController(AdminBibliotecaContext contextDB)
+        public LibrosController(AdminBibliotecaContext contextDB)
         {
             this._ContextDB = contextDB;
-            this._Biblioteca = new Biblioteca(new AutoresBll(contextDB));
+            this._Biblioteca = new Biblioteca(new LibrosBll(contextDB));
         }
 
-        // GET: api/Autores
+        // GET: api/Libros
         [HttpGet]
         public ApiResultadoDto Get()
         {
             return _Biblioteca.Listado();
         }
 
-        // POST: api/Autores
+
+        // POST: api/Libros
         [HttpPost]
         public ApiResultadoDto Post([FromBody] BibliotecaDto entity)
         {
             return _Biblioteca.Adicionar(entity);
         }
 
-        // PUT: api/Autores/5
+        // PUT: api/Libros/5
         [HttpPut("{id}")]
         public ApiResultadoDto Put(int id, [FromBody] BibliotecaDto entity)
         {
-            return _Biblioteca.Editar(id, entity);
+            return _Biblioteca.Editar(id,entity);
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Libros/5
         [HttpDelete("{id}")]
         public ApiResultadoDto Delete(int id)
         {

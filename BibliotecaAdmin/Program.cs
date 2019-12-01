@@ -14,21 +14,16 @@ namespace BibliotecaAdmin
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        //public static IHostBuilder CreateHostBuilder(string[] args) =>
-        //    Host.CreateDefaultBuilder(args)
-        //        .ConfigureWebHostDefaults(webBuilder =>
-        //        {
-        //            webBuilder.UseStartup<Startup>();
-        //        });
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
 
-        public static IWebHost BuildWebHost(string[] args) =>
-           WebHost.CreateDefaultBuilder(args)
-               .UseStartup<Startup>()
-               .UseUrls("http://localhost:57819")
-               .Build();
     }
 
 }
