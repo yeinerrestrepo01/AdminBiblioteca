@@ -41,11 +41,11 @@ namespace BibliotecaAdmin
         {
             var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
             var useresult = new User { Username = user.Username, Nombres = user.Nombres, Apellidos  = user.Apellidos};
-            // return null if user not found
+
             if (useresult == null)
                 return null;
 
-            // authentication successful so generate jwt token
+            // authentication exitosa para generar jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -59,7 +59,7 @@ namespace BibliotecaAdmin
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             useresult.Token = tokenHandler.WriteToken(token);
-            useresult.Expires = TimeSpan.FromHours(10).TotalMinutes;
+            useresult.Expires = TimeSpan.FromMinutes(10).TotalMinutes;
             return useresult;
         }
     }
