@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { AutoresService } from 'src/app/shared/services/Autores/autores.service';
 import { CategoriasService } from 'src/app/shared/services/categorias/categorias.service';
 import { LibrosService } from 'src/app/shared/services/Libros/libros.service';
-
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'app-gestion-libros',
   templateUrl: './gestion-libros.component.html',
@@ -11,21 +11,25 @@ import { LibrosService } from 'src/app/shared/services/Libros/libros.service';
   providers: [FormBuilder]
 })
 export class GestionLibrosComponent implements OnInit {
-
+  public model: any;
   isupdate: boolean = false;
   listAutores: any[];
   listcategorias: any[];
   listLibros: any[];
   idlibro: any;
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings: IDropdownSettings;
+  itemautorid: any;
 
   // form control
 
   public formGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(private formBuilder: FormBuilder,
     private serviceAutores: AutoresService,
     private categoriasService: CategoriasService,
-    private serviceslibros : LibrosService) { }
+    private serviceslibros: LibrosService) { }
 
   ngOnInit() {
     this.ListAutores();
@@ -38,16 +42,27 @@ export class GestionLibrosComponent implements OnInit {
       nombrelibro: new FormControl("", []),
       isbn: new FormControl("", [])
     });
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'idAutor',
+      textField: 'nombre',
+      selectAllText: 'Seleccionar todo',
+      unSelectAllText: 'Deseleccione todos',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    }
   }
 
   ListAutores() {
     this.serviceAutores.ListAutoress().subscribe((data: any) => {
       if (!data.isError) {
         this.listAutores = data.resultado;
+        this.dropdownList = this.listAutores;
+        console.log(this.listAutores)
       }
     });
   }
-  
+
   ListCategorias() {
     this.categoriasService.ListCategorias().subscribe((data: any) => {
       if (!data.isError) {
@@ -74,25 +89,25 @@ export class GestionLibrosComponent implements OnInit {
         alert(data.mensaje);
       }
       this.isupdate = false;
-      this.ListAutores();
+      this.ListLibros();
     });
 
   }
-  EditarRegistro(libro:any)
-  {
+  EditarRegistro(libro: any) {
     this.idlibro = libro.idLibro;
     this.formGroup.controls['nombrelibro'].setValue(libro.nombreLibro);
     this.formGroup.controls['autor'].setValue(libro.idAutor);
     this.formGroup.controls['categoria'].setValue(libro.idCategoria);
     this.formGroup.controls['isbn'].setValue(libro.isbn);
     this.isupdate = true;
+    this.itemautorid = libro.idAutor;
   }
 
   ActualizarRegistro() {
-
-    let objeclibros= {
-      Nombres: this.formGroup.value.nombreautor,
-      IdAutor: 1,
+    debugger
+    let objeclibros = {
+      Nombres: this.formGroup.value.nombrelibro,
+      IdAutor: parseInt(this.itemautorid),
       IdCategoria: parseInt(this.formGroup.value.categoria),
       ISBN: this.formGroup.value.isbn
     }
@@ -104,40 +119,49 @@ export class GestionLibrosComponent implements OnInit {
       else {
         alert(data.mensaje);
       }
+      this.ListLibros();
       this.isupdate = false;
-      this.ListAutores();
     });
   }
 
   RegistrarLibro() {
+    if (this.formGroup.value.categoria == '' || this.itemautorid == '') 
+    {
+      alert("Por favor valide que se haya seleccionado una categoria y autor");
 
-    let objectlibros= {
-      Nombres: this.formGroup.value.nombreautor,
-      IdAutor: parseInt(this.formGroup.value.autor),
-      IdCategoria: parseInt(this.formGroup.value.categoria),
-      ISBN: this.formGroup.value.isbn
+    } else {
+      let objectlibros = {
+        Nombres: this.formGroup.value.nombrelibro,
+        IdAutor: parseInt(this.itemautorid),
+        IdCategoria: parseInt(this.formGroup.value.categoria),
+        ISBN: this.formGroup.value.isbn
+      }
+
+      this.serviceslibros.CrearLibro(objectlibros).subscribe((data: any) => {
+        if (!data.isError) {
+          alert(data.mensaje);
+        }
+        else {
+          alert(data.mensaje);
+        }
+        this.isupdate = false;
+        this.ListLibros();
+      });
     }
 
-    this.serviceslibros.CrearLibro(objectlibros).subscribe((data: any) => {
-      if (!data.isError) {
-        alert(data.mensaje);
-      }
-      else {
-        alert(data.mensaje);
-      }
-      this.isupdate = false;
-      this.ListAutores();
-    });
   }
 
 
   cancelar() {
     this.isupdate = false;
     this.formGroup = this.formBuilder.group({
-      autor: new FormControl("", []),
       categoria: new FormControl("", []),
       nombrelibro: new FormControl("", []),
       isbn: new FormControl("", [])
     });
-    }
+  }
+  onItemSelect(selectItem: any) {
+    this.itemautorid = selectItem.idAutor;
+  }
+
 }
