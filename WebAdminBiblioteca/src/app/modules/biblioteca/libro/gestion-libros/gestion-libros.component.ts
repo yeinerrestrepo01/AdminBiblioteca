@@ -4,6 +4,8 @@ import { AutoresService } from 'src/app/shared/services/Autores/autores.service'
 import { CategoriasService } from 'src/app/shared/services/categorias/categorias.service';
 import { LibrosService } from 'src/app/shared/services/Libros/libros.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { AutoresModel } from 'src/app/model/AutoresModel';
+
 @Component({
   selector: 'app-gestion-libros',
   templateUrl: './gestion-libros.component.html',
@@ -18,7 +20,7 @@ export class GestionLibrosComponent implements OnInit {
   listLibros: any[];
   idlibro: any;
   dropdownList = [];
-  selectedItems = [];
+  selectedItems: any[];
   dropdownSettings: IDropdownSettings;
   itemautorid: any;
 
@@ -90,6 +92,7 @@ export class GestionLibrosComponent implements OnInit {
       }
       this.isupdate = false;
       this.ListLibros();
+      this.cancelar();
     });
 
   }
@@ -120,6 +123,7 @@ export class GestionLibrosComponent implements OnInit {
         alert(data.mensaje);
       }
       this.ListLibros();
+      this.cancelar();
       this.isupdate = false;
     });
   }
@@ -146,6 +150,7 @@ export class GestionLibrosComponent implements OnInit {
         }
         this.isupdate = false;
         this.ListLibros();
+        this.cancelar();
       });
     }
 
@@ -161,6 +166,8 @@ export class GestionLibrosComponent implements OnInit {
     });
   }
   onItemSelect(selectItem: any) {
+    debugger;
+    this.dropdownSettings.idField = selectItem.idAutor;
     this.itemautorid = selectItem.idAutor;
   }
 
