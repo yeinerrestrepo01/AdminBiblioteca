@@ -35,5 +35,10 @@ namespace Bll
         {
             return BibliotecaI.Eliminar(id);
         }
+
+        public ApiResultadoDto BusquedaLibro(string libro, int autor, int categoria)
+        {
+            return BibliotecaI.BusquedaLibros(libro, autor, categoria);
+        }
     }
 }

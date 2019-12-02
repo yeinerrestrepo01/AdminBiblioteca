@@ -11,5 +11,6 @@ namespace Bll
         public ApiResultadoDto Listado();
         public ApiResultadoDto Eliminar(int id);
         public ApiResultadoDto Adicionar(BibliotecaDto entity);
+        public ApiResultadoDto BusquedaLibros(string libro, int autor, int categoria);
     }
 }

@@ -1,0 +1,58 @@
+<div class="container">
+    <form [formGroup]="formGroup">
+        <div class="form-row col-12">
+            <div class="form-group col-md-4">
+                <label for="nombrelibro">Nombre de libro</label>
+                <input type="text" class="form-control  fron-control-br" id="nombrelibro" placeholder="Nombre Libro"
+                    name="nombrelibro">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="autor">Categoría</label>
+                <select id="categoria" class="form-control fron-control-br" formControlName="autor">
+                    <option *ngFor="let categoria of listcategorias" [value]="categoria.idCategoria">
+                        {{categoria.nombre}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="autor">Autores</label>
+                <select id="autor" class="form-control fron-control-br" formControlName="autor">
+                    <option *ngFor="let autor of listAutores" [value]="autor.idAutor">
+                        {{autor.nombre}} {{autor.apellidos}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+                <button type="button" class="btn btn-primary" style="margin-right: 5px;" *ngIf="!isupdate"
+                    (click)="Buscar()"> Buscar</button>
+            </div>
+    </form>
+
+    <div class="col-md-12" style="margin-top: 14px;">
+            <h4>Listado de Categorias</h4>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let libros of listLibros">
+                        <td>{{libros.nombreLibro}}</td>
+                        <td>{{libros.autor}}</td>
+                        <td>{{libros.categoria}}</td>
+                        <td>{{libros.isbn}}</td>
+                        <td>
+                            <i class="fa fa-close" style="cursor: pointer;margin-right: 8px;" title="Eliminar"
+                                (click)="RemoverLibro(libros)"></i>
+                            <i class="fa fa-edit" style="cursor: pointer;" title="Actualizar"
+                                (click)="EditarRegistro(libros)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

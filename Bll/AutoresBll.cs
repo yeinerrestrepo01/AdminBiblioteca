@@ -56,6 +56,11 @@ namespace Bll
             return Apiresult;
         }
 
+        public ApiResultadoDto BusquedaLibros(string libro, int autor, int categoria)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// edicion de registros para Autores
         /// </summary>

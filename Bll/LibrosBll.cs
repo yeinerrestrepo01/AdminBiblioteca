@@ -57,6 +57,29 @@ namespace Bll
         }
 
         /// <summary>
+        /// Busqueda de libros por parametros especificos
+        /// </summary>
+        /// <returns></returns>
+        public ApiResultadoDto BusquedaLibros(string libro, int autor, int categoria)
+        {
+            var Apiresult = new ApiResultadoDto();
+            var consultalibro = BibliotecaContex.Libros.Where(t => String.IsNullOrEmpty(libro) ? true : t.NombreLibro.Contains(libro) || t.Autores.IdAutor == 0 ? true : t.Autores.IdAutor == autor).
+                Select(t => new LibrosDto
+                {
+                    NombreLibro = t.NombreLibro,
+                    ISBN = t.ISBN,
+                    Autor = t.Autores.Nombre + " " + t.Autores.Apellidos,
+                    Categoria = t.Categorias.Nombre,
+                    IdLibro = t.IdLibro,
+                    IdCategoria = t.CategoriasIdCategoria,
+                    IdAutor = t.AutoresIdAutor
+
+                }).ToList();
+            Apiresult.Resultado = consultalibro;
+             return Apiresult;
+       }
+
+        /// <summary>
         /// realiza la edicion de un libro especifico
         /// </summary>
         /// <param name="id">el identificador de la categoria</param>

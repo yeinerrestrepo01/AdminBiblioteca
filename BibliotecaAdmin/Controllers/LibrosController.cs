@@ -36,6 +36,13 @@ namespace BibliotecaAdmin.Controllers
             return _Biblioteca.Listado();
         }
 
+        [Route("GetParametros")]
+        [HttpGet]
+        public ApiResultadoDto Get(string libro, int autor,int categoria)
+        {
+            return _Biblioteca.BusquedaLibro(libro,autor, categoria);
+        }
+
 
         // POST: api/Libros
         [HttpPost]

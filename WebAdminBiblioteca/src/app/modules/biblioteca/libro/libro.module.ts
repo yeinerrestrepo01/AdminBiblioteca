@@ -7,10 +7,11 @@ import { GestionLibrosComponent } from './gestion-libros/gestion-libros.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BuscarLibrosComponent } from './buscar-libros/buscar-libros.component';
 
 
 @NgModule({
-  declarations: [GestionLibrosComponent],
+  declarations: [GestionLibrosComponent, BuscarLibrosComponent],
   imports: [
     CommonModule,
     LibroRoutingModule,
