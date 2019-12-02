@@ -8,6 +8,7 @@ using Entities.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaAdmin.Controllers
 {
@@ -29,7 +30,7 @@ namespace BibliotecaAdmin.Controllers
             this._Biblioteca = new Biblioteca(new LibrosBll(contextDB));
         }
 
-        // GET: api/Libros
+    
         [HttpGet]
         public ApiResultadoDto Get()
         {
@@ -38,11 +39,10 @@ namespace BibliotecaAdmin.Controllers
 
         [Route("GetParametros")]
         [HttpGet]
-        public ApiResultadoDto Get(string libro, int autor,int categoria)
+        public ApiResultadoDto GetParametros(string libro, int? autor, int? categoria)
         {
-            return _Biblioteca.BusquedaLibro(libro,autor, categoria);
+            return _Biblioteca.BusquedaLibro(libro, (int)autor, (int)categoria);
         }
-
 
         // POST: api/Libros
         [HttpPost]

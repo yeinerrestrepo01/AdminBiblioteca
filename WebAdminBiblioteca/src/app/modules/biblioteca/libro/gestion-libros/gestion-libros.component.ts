@@ -97,6 +97,7 @@ export class GestionLibrosComponent implements OnInit {
 
   }
   EditarRegistro(libro: any) {
+    debugger
     this.idlibro = libro.idLibro;
     this.formGroup.controls['nombrelibro'].setValue(libro.nombreLibro);
     this.formGroup.controls['autor'].setValue(libro.idAutor);
@@ -159,11 +160,6 @@ export class GestionLibrosComponent implements OnInit {
 
   cancelar() {
     this.isupdate = false;
-    this.formGroup = this.formBuilder.group({
-      categoria: new FormControl("", []),
-      nombrelibro: new FormControl("", []),
-      isbn: new FormControl("", [])
-    });
   }
   onItemSelect(selectItem: any) {
     debugger;

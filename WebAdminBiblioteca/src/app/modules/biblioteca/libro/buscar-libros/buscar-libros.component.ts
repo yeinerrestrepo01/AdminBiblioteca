@@ -36,6 +36,8 @@ export class BuscarLibrosComponent implements OnInit {
       categoria: new FormControl("", []),
       nombrelibro: new FormControl("", [])
     });
+    this.formGroup.controls.categoria.setValue("");
+    this.formGroup.controls.autor.setValue("");
   }
 
   ListAutores() {
@@ -55,11 +57,18 @@ export class BuscarLibrosComponent implements OnInit {
     });
   }
   Buscar(){
+    debugger
     let objeclibros = {
       Nombres: this.formGroup.value.nombrelibro,
-      IdAutor: parseInt(this.formGroup.value.autor),
-      IdCategoria: parseInt(this.formGroup.value.categoria),
+      IdAutor: this.formGroup.value.autor != '' ? parseInt(this.formGroup.value.autor):0,
+      IdCategoria: this.formGroup.value.categoria != '' ? parseInt(this.formGroup.value.categoria):0,
     }
+
+    this.serviceslibros.ListLibrosParametros(objeclibros.Nombres, objeclibros.IdAutor, objeclibros.IdCategoria).subscribe((data: any) => {
+      if (!data.isError) {
+        this.listLibros = data.resultado;
+      }
+    });
     console.log(objeclibros);
   }
 }

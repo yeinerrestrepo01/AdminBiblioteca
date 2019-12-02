@@ -63,7 +63,8 @@ namespace Bll
         public ApiResultadoDto BusquedaLibros(string libro, int autor, int categoria)
         {
             var Apiresult = new ApiResultadoDto();
-            var consultalibro = BibliotecaContex.Libros.Where(t => String.IsNullOrEmpty(libro) ? true : t.NombreLibro.Contains(libro) || t.Autores.IdAutor == 0 ? true : t.Autores.IdAutor == autor).
+            var consultalibro = BibliotecaContex.Libros.Where(t => (categoria == 0 ? true : t.Categorias.IdCategoria == categoria)
+            && (autor == 0 ? true : t.Autores.IdAutor == autor) && (String.IsNullOrEmpty(libro)? true : t.NombreLibro == libro)).
                 Select(t => new LibrosDto
                 {
                     NombreLibro = t.NombreLibro,

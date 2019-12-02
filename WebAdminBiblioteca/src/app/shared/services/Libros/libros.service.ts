@@ -14,6 +14,10 @@ export class LibrosService {
     return this.api.get('api/Libros')
   }
 
+  ListLibrosParametros(libro:any, autor: any, categoria:any){
+    return this.api.get('api/Libros/GetParametros',{libro:libro, categoria:categoria, autor:autor})
+  }
+
   RemoverLibro(idLibro:any){
         return this.api.delete('api/Libros/' + idLibro);
   }
